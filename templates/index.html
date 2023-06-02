@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Emotion Recognition</title>
+	<style>
+	body{
+		background: #0f0c29; 
+		background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29); 
+		background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	}
+	.container{
+		margin: 0 auto;
+		width: 80%;
+		border: 1px solid white;
+		box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;	
+	}
+	.container h1{
+		margin: 0;
+		padding: .5em;
+		color: wheat;
+	}
+        #video-feed {
+            width: auto;
+            height: 60%;
+			visibility: hidden;
+        }
+		#stop_box{
+			color: wheat;
+
+		}
+        #button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #start_button, #stop_button {
+            padding: 10px 20px;
+            background-color: #8af9f1;
+            color: #0d8a82;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+			font-weight: 600;
+			width: 10em;
+			margin: 0 2em 1em 2em;
+			border-radius: 2em;
+        }
+        #start_button:hover, #stop_button:hover {
+            background-color: #305350;
+			color: #8af9f1;
+			border-radius: .5em;	
+			transition: .2s;
+        }
+    </style>
+</head>
+<body>
+	<div class="container">
+		<h1>EMOTION RECOGNITION</h1>
+		<div>
+			<img id="video-feed" src="" alt="video feed">
+			<div id="stop_box">
+				<h2>Click On Start To Recognize</h2>
+			</div>
+		</div>
+		<div id="button-container">
+			<button id="start_button" onclick="start()">Start</button>
+			<button id="stop_button" onclick="stop()">Stop</button>
+		</div>
+	</div>
+    <script>
+		var video = document.getElementById('video_feed');
+		
+		function start() {
+			document.querySelector('#video-feed').src = "{{ url_for('video_feed') }}";
+			document.querySelector('#video-feed').style.visibility = 'visible';
+			document.querySelector('#stop_box').style.visibility = 'hidden';
+			// if (navigator.mediaDevices.getUserMedia) {
+			// 	navigator.mediaDevices.getUserMedia({ video: true })
+			// 	  .then(function (stream) {
+			// 		video.srcObject = stream;
+			// 		video.play();
+			// 	  })
+			// 	  .catch(function (error) {
+			// 		console.log("Something went wrong!");
+			// 	  });
+			// }
+		}
+		
+		function stop() {
+			document.querySelector('#video-feed').src = '';
+			document.querySelector('#video-feed').style.visibility = 'hidden';
+			document.querySelector('#stop_box').style.visibility = 'visible';
+
+			// var stream = video.srcObject;
+			// var tracks = stream.getTracks();
+		
+			// for (var i = 0; i < tracks.length; i++) {
+			// 	var track = tracks[i];
+			// 	track.stop();
+			// }
+		
+			// video.srcObject = null;
+		}
+		</script>
+</body>
+</html>
